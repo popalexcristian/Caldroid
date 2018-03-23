@@ -2,8 +2,11 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:caldroid="http://schemas.android.com/apk/res-auto">
 
-    <item android:color="@color/caldroid_darker_gray" caldroid:state_date_disabled="true"/>
-    <item android:color="@color/caldroid_darker_gray" caldroid:state_date_prev_next_month="true"/>
-    <item android:color="@color/caldroid_black"/>
+    <item android:color="#ffaeadad" caldroid:state_date_disabled="true" />
+    <item android:color="#ffaeadad" caldroid:state_date_prev_next_month="true" />
+    <item android:color="@android:color/white" caldroid:state_date_selected="true" />
+    <item android:color="@android:color/white" caldroid:state_date_today="true" />
+    <item android:color="@android:color/white" android:state_pressed="true" />
+    <item android:color="#ff111112" />
 
 </selector>

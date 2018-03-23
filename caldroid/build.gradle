@@ -1,17 +1,22 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion "22.0.1"
+    compileSdkVersion 27
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
-        minSdkVersion 8
-        targetSdkVersion 22
+        minSdkVersion 14
+        targetSdkVersion 27
     }
 }
 
+ext {
+    supportLibraryVersion = '27.0.2'
+}
+
 dependencies {
-    compile 'com.android.support:support-v4:22.2.0'
+    compile "com.android.support:support-v4:${supportLibraryVersion}"
+    compile 'uk.co.chrisjenx:calligraphy:2.3.0'
     compile 'com.darwinsys:hirondelle-date4j:1.5.1'
 }
 

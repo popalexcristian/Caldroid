@@ -23,8 +23,8 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.antonyt.infiniteviewpager.InfinitePagerAdapter;
@@ -120,8 +120,8 @@ public class CaldroidFragment extends DialogFragment {
     /**
      * Caldroid view components
      */
-    private Button leftArrowButton;
-    private Button rightArrowButton;
+    private ImageView leftArrowButton;
+    private ImageView rightArrowButton;
     private TextView monthTitleTextView;
     private GridView weekdayGridView;
     private InfiniteViewPager dateViewPager;
@@ -239,6 +239,7 @@ public class CaldroidFragment extends DialogFragment {
 
     /**
      * Retrieve current month
+     *
      * @return
      */
     public int getMonth() {
@@ -247,6 +248,7 @@ public class CaldroidFragment extends DialogFragment {
 
     /**
      * Retrieve current year
+     *
      * @return
      */
     public int getYear() {
@@ -316,11 +318,11 @@ public class CaldroidFragment extends DialogFragment {
     /**
      * To let user customize the navigation buttons
      */
-    public Button getLeftArrowButton() {
+    public ImageView getLeftArrowButton() {
         return leftArrowButton;
     }
 
-    public Button getRightArrowButton() {
+    public ImageView getRightArrowButton() {
         return rightArrowButton;
     }
 
@@ -798,9 +800,10 @@ public class CaldroidFragment extends DialogFragment {
                 .getDateFromString(toDateString, dateFormat);
         setSelectedDates(fromDate, toDate);
     }
-    
+
     /**
      * Select single date
+     *
      * @author Alov Maxim <alovmax@yandex.ru>
      */
     public void setSelectedDate(Date date) {
@@ -810,9 +813,10 @@ public class CaldroidFragment extends DialogFragment {
         DateTime dateTime = CalendarHelper.convertDateToDateTime(date);
         selectedDates.add(dateTime);
     }
-    
+
     /**
      * Clear selection of the specified date
+     *
      * @author Alov Maxim <alovmax@yandex.ru>
      */
     public void clearSelectedDate(Date date) {
@@ -822,9 +826,10 @@ public class CaldroidFragment extends DialogFragment {
         DateTime dateTime = CalendarHelper.convertDateToDateTime(date);
         selectedDates.remove(dateTime);
     }
-    
+
     /**
      * Checks whether the specified date is selected
+     *
      * @author Alov Maxim <alovmax@yandex.ru>
      */
     public boolean isSelectedDate(Date date) {
@@ -977,8 +982,18 @@ public class CaldroidFragment extends DialogFragment {
                             }
                         }
 
+                        clearSelectedDates();
+
                         Date date = CalendarHelper
                                 .convertDateTimeToDate(dateTime);
+
+                        setSelectedDate(date);
+
+                        if (dateTime.equals(CalendarHelper.convertDateToDateTime(new Date()))) {
+                            refreshViewWithoutTodayDate();
+                        } else {
+                            refreshView();
+                        }
                         caldroidListener.onSelectDate(date, view);
                     }
                 }
@@ -1069,6 +1084,28 @@ public class CaldroidFragment extends DialogFragment {
 
             // Update today variable
             adapter.updateToday();
+
+            // Refresh view
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    public void refreshViewWithoutTodayDate() {
+        // If month and year is not yet initialized, refreshView doesn't do
+        // anything
+        if (month == -1 || year == -1) {
+            return;
+        }
+
+        refreshMonthTitleTextView();
+
+        // Refresh the date grid views
+        for (CaldroidGridAdapter adapter : datePagerAdapters) {
+            // Reset caldroid data
+            adapter.setCaldroidData(getCaldroidData());
+
+            // Reset extra data
+            adapter.setExtraData(extraData);
 
             // Refresh view
             adapter.notifyDataSetChanged();
@@ -1261,8 +1298,8 @@ public class CaldroidFragment extends DialogFragment {
                 .findViewById(R.id.calendar_month_year_textview);
 
         // For the left arrow button
-        leftArrowButton = (Button) view.findViewById(R.id.calendar_left_arrow);
-        rightArrowButton = (Button) view
+        leftArrowButton = (ImageView) view.findViewById(R.id.calendar_left_arrow);
+        rightArrowButton = (ImageView) view
                 .findViewById(R.id.calendar_right_arrow);
 
         // Navigate to previous month when user click
@@ -1300,18 +1337,18 @@ public class CaldroidFragment extends DialogFragment {
         return view;
     }
 
-	@Override
-	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-		// Inform client that all views are created and not null
-		// Client should perform customization for buttons and textviews here
-		if (caldroidListener != null) {
-			caldroidListener.onCaldroidViewCreated();
-		}
-	}
+        // Inform client that all views are created and not null
+        // Client should perform customization for buttons and textviews here
+        if (caldroidListener != null) {
+            caldroidListener.onCaldroidViewCreated();
+        }
+    }
 
-	/**
+    /**
      * This method can be used to provide different gridview.
      *
      * @return

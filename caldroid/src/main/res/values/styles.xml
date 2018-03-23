@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="CaldroidDefault">
         <item name="styleCaldroidViewLayout">@style/CaldroidDefaultCalendarViewLayout</item>
         <item name="styleCaldroidLeftArrow">@style/CaldroidDefaultLeftButton</item>
@@ -33,31 +34,30 @@
     </style>
 
     <style name="CaldroidDefaultMonthName">
-        <item name="android:textColor">@android:color/black</item>
+        <item name="fontPath">fonts/Merriweather-Bold.ttf</item>
+        <item name="android:textColor">#ff111112</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">3dp</item>
         <item name="android:gravity">center_horizontal</item>
-        <item name="android:textSize">21sp</item>
+        <item name="android:textSize">17sp</item>
     </style>
 
     <style name="CaldroidDefaultGridView">
+        <item name="fontPath">fonts/Merriweather-Bold.ttf</item>
         <item name="android:adjustViewBounds">true</item>
         <item name="android:gravity">center_horizontal</item>
-        <item name="android:listSelector">@null</item>
-        <item name="android:background">@color/caldroid_lighter_gray</item>
-        <item name="android:horizontalSpacing">1dp</item>
+        <item name="android:horizontalSpacing">9dp</item>
         <item name="android:padding">1dp</item>
-        <item name="android:verticalSpacing">1dp</item>
+        <item name="android:verticalSpacing">9dp</item>
     </style>
 
     <style name="CaldroidDefaultCell">
+        <item name="fontPath">fonts/Roboto-Regular.ttf</item>
         <item name="android:textColor">@color/cell_text_color</item>
         <item name="android:background">@drawable/cell_bg</item>
         <item name="android:gravity">center</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">17sp</item>
     </style>
 
     <style name="CaldroidDefaultNormalCell" parent="CaldroidDefaultCell">
@@ -67,7 +67,8 @@
     <style name="CaldroidDefaultSquareCell" parent="CaldroidDefaultCell" />
 
     <style name="CaldroidDefaultWeekday">
-        <item name="android:textColor">@color/caldroid_middle_gray</item>
+        <item name="fontPath">fonts/Merriweather-Bold.ttf</item>
+        <item name="android:textColor">@android:color/black</item>
         <item name="android:gravity">center</item>
         <item name="android:textSize">12sp</item>
         <item name="android:paddingTop">6dp</item>
@@ -105,5 +106,30 @@
     </style>
 
     <style name="CaldroidDefaultDarkSquareCell" parent="CaldroidDefaultDarkCell" />
+
+    <style name="RobotoRegular">
+        <item name="fontPath">fonts/Roboto-Regular.ttf</item>
+    </style>
+
+    <style name="RobotoBold">
+        <item name="fontPath">fonts/Roboto-Bold.ttf</item>
+    </style>
+
+    <style name="RobotoBlack">
+        <item name="fontPath">fonts/Roboto-Black.ttf</item>
+    </style>
+
+    <style name="RobotoLight">
+        <item name="fontPath">fonts/Roboto-Light.ttf</item>
+    </style>
+
+    <style name="MerriweatherBold">
+        <item name="fontPath">fonts/Merriweather-Bold.ttf</item>
+
+    </style>
+
+    <style name="MerriweatherRegular">
+        <item name="fontPath">fonts/Merriweather-Regular.ttf</item>
+    </style>
 
 </resources>
