@@ -1298,9 +1298,8 @@ public class CaldroidFragment extends DialogFragment {
                 .findViewById(R.id.calendar_month_year_textview);
 
         // For the left arrow button
-        leftArrowButton = (ImageView) view.findViewById(R.id.calendar_left_arrow);
-        rightArrowButton = (ImageView) view
-                .findViewById(R.id.calendar_right_arrow);
+        leftArrowButton = view.findViewById(R.id.calendar_left_arrow);
+        rightArrowButton = view.findViewById(R.id.calendar_right_arrow);
 
         // Navigate to previous month when user click
         leftArrowButton.setOnClickListener(new OnClickListener() {
