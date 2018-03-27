@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import hirondelle.date4j.DateTime;
 
@@ -129,6 +130,7 @@ public class CalendarHelper {
 
         // datetimeMonth start at 1. Need to minus 1 to get javaMonth
         calendar.set(year, datetimeMonth - 1, day);
+        calendar.setTimeZone(TimeZone.getTimeZone("GMT"));
 
         return calendar.getTime();
     }
