@@ -1029,8 +1029,18 @@ public class CaldroidFragment extends DialogFragment {
                                 return false;
                             }
                         }
+                        clearSelectedDates();
+
                         Date date = CalendarHelper
                                 .convertDateTimeToDate(dateTime);
+
+                        setSelectedDate(date);
+
+                        if (dateTime.equals(CalendarHelper.convertDateToDateTime(new Date()))) {
+                            refreshViewWithoutTodayDate();
+                        } else {
+                            refreshView();
+                        }
                         caldroidListener.onLongClickDate(date, view);
                     }
 
