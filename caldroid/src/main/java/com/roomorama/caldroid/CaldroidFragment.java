@@ -45,6 +45,8 @@ import java.util.TimeZone;
 
 import hirondelle.date4j.DateTime;
 
+import static android.graphics.PorterDuff.Mode.SRC_ATOP;
+
 /**
  * Caldroid is a fragment that display calendar with dates in a month. Caldroid
  * can be used as embedded fragment, or as dialog fragment. <br/>
@@ -79,6 +81,7 @@ import hirondelle.date4j.DateTime;
 
 @SuppressLint("DefaultLocale")
 public class CaldroidFragment extends DialogFragment {
+    public static final int INVALID_APP_COLOR = -1;
     /**
      * Weekday conventions
      */
@@ -147,7 +150,8 @@ public class CaldroidFragment extends DialogFragment {
             SIX_WEEKS_IN_CALENDAR = "sixWeeksInCalendar",
             ENABLE_CLICK_ON_DISABLED_DATES = "enableClickOnDisabledDates",
             SQUARE_TEXT_VIEW_CELL = "squareTextViewCell",
-            THEME_RESOURCE = "themeResource";
+            THEME_RESOURCE = "themeResource",
+            APP_COLOR = "appColor";
 
     /**
      * For internal use
@@ -169,6 +173,7 @@ public class CaldroidFragment extends DialogFragment {
     protected DateTime minDateTime;
     protected DateTime maxDateTime;
     protected ArrayList<DateTime> dateInMonthsList;
+    protected int mAppColor;
 
     /**
      * caldroidData belongs to Caldroid
@@ -983,6 +988,7 @@ public class CaldroidFragment extends DialogFragment {
                         }
 
                         clearSelectedDates();
+                        view.getBackground().clearColorFilter();
 
                         Date date = CalendarHelper
                                 .convertDateTimeToDate(dateTime);
@@ -993,6 +999,9 @@ public class CaldroidFragment extends DialogFragment {
                             refreshViewWithoutTodayDate();
                         } else {
                             refreshView();
+                        }
+                        if (mAppColor != INVALID_APP_COLOR) {
+                            view.getBackground().setColorFilter(mAppColor, SRC_ATOP);
                         }
                         caldroidListener.onSelectDate(date, view);
                     }
@@ -1030,6 +1039,7 @@ public class CaldroidFragment extends DialogFragment {
                             }
                         }
                         clearSelectedDates();
+                        view.getBackground().clearColorFilter();
 
                         Date date = CalendarHelper
                                 .convertDateTimeToDate(dateTime);
@@ -1040,6 +1050,9 @@ public class CaldroidFragment extends DialogFragment {
                             refreshViewWithoutTodayDate();
                         } else {
                             refreshView();
+                        }
+                        if (mAppColor != INVALID_APP_COLOR) {
+                            view.getBackground().setColorFilter(mAppColor, SRC_ATOP);
                         }
                         caldroidListener.onLongClickDate(date, view);
                     }
@@ -1173,6 +1186,8 @@ public class CaldroidFragment extends DialogFragment {
             } else {
                 squareTextViewCell = args.getBoolean(SQUARE_TEXT_VIEW_CELL, false);
             }
+
+            mAppColor = args.getInt(APP_COLOR);
 
             // Get clickable setting
             enableClickOnDisabledDates = args.getBoolean(
@@ -1331,6 +1346,11 @@ public class CaldroidFragment extends DialogFragment {
 
         // Show navigation arrows depend on initial arguments
         setShowNavigationArrows(showNavigationArrows);
+
+        if (mAppColor != INVALID_APP_COLOR) {
+            leftArrowButton.getDrawable().setColorFilter(mAppColor, SRC_ATOP);
+            rightArrowButton.getDrawable().setColorFilter(mAppColor, SRC_ATOP);
+        }
 
         // For the weekday gridview ("SUN, MON, TUE, WED, THU, FRI, SAT")
         weekdayGridView = (GridView) view.findViewById(R.id.weekday_gridview);
