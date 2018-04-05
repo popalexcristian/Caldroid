@@ -270,7 +270,7 @@ public class CaldroidFragment extends DialogFragment {
      */
     public CaldroidGridAdapter getNewDatesGridAdapter(int month, int year) {
         return new CaldroidGridAdapter(getActivity(), month, year,
-                getCaldroidData(), extraData);
+                getCaldroidData(), extraData, mAppColor);
     }
 
     /**
@@ -988,20 +988,15 @@ public class CaldroidFragment extends DialogFragment {
                         }
 
                         clearSelectedDates();
-                        view.getBackground().clearColorFilter();
 
                         Date date = CalendarHelper
                                 .convertDateTimeToDate(dateTime);
-
                         setSelectedDate(date);
 
                         if (dateTime.equals(CalendarHelper.convertDateToDateTime(new Date()))) {
                             refreshViewWithoutTodayDate();
                         } else {
                             refreshView();
-                        }
-                        if (mAppColor != INVALID_APP_COLOR) {
-                            view.getBackground().setColorFilter(mAppColor, SRC_ATOP);
                         }
                         caldroidListener.onSelectDate(date, view);
                     }
@@ -1039,7 +1034,6 @@ public class CaldroidFragment extends DialogFragment {
                             }
                         }
                         clearSelectedDates();
-                        view.getBackground().clearColorFilter();
 
                         Date date = CalendarHelper
                                 .convertDateTimeToDate(dateTime);
@@ -1051,9 +1045,7 @@ public class CaldroidFragment extends DialogFragment {
                         } else {
                             refreshView();
                         }
-                        if (mAppColor != INVALID_APP_COLOR) {
-                            view.getBackground().setColorFilter(mAppColor, SRC_ATOP);
-                        }
+
                         caldroidListener.onLongClickDate(date, view);
                     }
 
@@ -1468,8 +1460,7 @@ public class CaldroidFragment extends DialogFragment {
             dateGridFragment.setGridViewRes(getGridViewRes());
             dateGridFragment.setGridAdapter(adapter);
             dateGridFragment.setOnItemClickListener(getDateItemClickListener());
-            dateGridFragment
-                    .setOnItemLongClickListener(getDateItemLongClickListener());
+            dateGridFragment.setOnItemLongClickListener(getDateItemLongClickListener());
         }
 
         // Setup InfinitePagerAdapter to wrap around MonthPagerAdapter

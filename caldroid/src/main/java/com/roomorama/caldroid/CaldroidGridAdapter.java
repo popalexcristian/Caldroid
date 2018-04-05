@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
@@ -49,6 +51,7 @@ public class CaldroidGridAdapter extends BaseAdapter {
     protected boolean squareTextViewCell;
     protected int themeResource;
     protected Resources resources;
+    protected int mAppColor;
 
     protected int defaultCellBackgroundRes = -1;
     protected ColorStateList defaultTextColorRes;
@@ -142,7 +145,7 @@ public class CaldroidGridAdapter extends BaseAdapter {
      */
     public CaldroidGridAdapter(Context context, int month, int year,
                                Map<String, Object> caldroidData,
-                               Map<String, Object> extraData) {
+                               Map<String, Object> extraData, int appColor) {
         super();
         this.month = month;
         this.year = year;
@@ -150,6 +153,7 @@ public class CaldroidGridAdapter extends BaseAdapter {
         this.caldroidData = caldroidData;
         this.extraData = extraData;
         this.resources = context.getResources();
+        this.mAppColor = appColor;
 
         // Get data from caldroidData
         populateFromCaldroidData();
@@ -270,6 +274,8 @@ public class CaldroidGridAdapter extends BaseAdapter {
     }
 
     private void resetCustomResources(CellView cellView) {
+        StateListDrawable heh = (StateListDrawable) cellView.getBackground();
+        heh.clearColorFilter();
         cellView.setBackgroundResource(defaultCellBackgroundRes);
         cellView.setTextColor(defaultTextColorRes);
     }
@@ -320,6 +326,7 @@ public class CaldroidGridAdapter extends BaseAdapter {
 
         // Customize for selected dates
         if (selectedDates != null && selectedDatesMap.containsKey(dateTime)) {
+            cellView.getBackground().setColorFilter(mAppColor, PorterDuff.Mode.SRC);
             cellView.addCustomState(CellView.STATE_SELECTED);
         }
 

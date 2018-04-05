@@ -6,7 +6,6 @@
     <item android:color="#ffaeadad" caldroid:state_date_prev_next_month="true" />
     <item android:color="@android:color/white" caldroid:state_date_selected="true" />
     <item android:color="@android:color/white" caldroid:state_date_today="true" />
-    <item android:color="@android:color/white" android:state_pressed="true" />
     <item android:color="#ff111112" />
 
 </selector>

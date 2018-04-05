@@ -19,8 +19,8 @@ public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
 
 	public CaldroidSampleCustomAdapter(Context context, int month, int year,
 			Map<String, Object> caldroidData,
-			Map<String, Object> extraData) {
-		super(context, month, year, caldroidData, extraData);
+			Map<String, Object> extraData, int appColor) {
+		super(context, month, year, caldroidData, extraData, appColor);
 	}
 
 	@Override
