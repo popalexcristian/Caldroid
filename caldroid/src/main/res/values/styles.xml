@@ -47,6 +47,7 @@
         <item name="fontPath">fonts/Merriweather-Bold.ttf</item>
         <item name="android:adjustViewBounds">true</item>
         <item name="android:gravity">center_horizontal</item>
+        <item name="android:listSelector">@android:color/transparent</item>
         <item name="android:horizontalSpacing">9dp</item>
         <item name="android:padding">1dp</item>
         <item name="android:verticalSpacing">9dp</item>
